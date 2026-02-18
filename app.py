@@ -1,8 +1,8 @@
 import streamlit as st
+import pandas as pd
 
-st.set_page_config(page_title="تبدیل سود بانکی و YTM")
-
-st.title("📊 تبدیل سود بانکی ↔ YTM")
+st.set_page_config(page_title="YTM ↔ سود بانکی")
+st.title("📊 YTM ↔ تبدیل سود بانکی")
 
 mode = st.radio(
     "نوع تبدیل:",
@@ -18,13 +18,12 @@ rate = st.number_input(
 
 if mode == "YTM → سود بانکی":
     result = 12 * ((1 + rate)**(1/12) - 1)
-    st.success(f"سود بانکی معادل: {result*100:.2f}٪")
+    st.success(f"سود بانکی معادل: {result*100:.2f}%")
 else:
     result = (1 + rate/12)**12 - 1
-    st.success(f"YTM معادل: {result*100:.2f}٪")
-  import pandas as pd
-import streamlit as st
+    st.success(f"YTM معادل: {result*100:.2f}%")
 
+# ===== NAV DATA =====
 @st.cache_data
 def load_navs():
     df = pd.read_csv("fund_navs.csv")
@@ -32,4 +31,3 @@ def load_navs():
     return df
 
 df_navs = load_navs()
-
