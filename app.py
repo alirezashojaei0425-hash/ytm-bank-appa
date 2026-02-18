@@ -22,4 +22,14 @@ if mode == "YTM → سود بانکی":
 else:
     result = (1 + rate/12)**12 - 1
     st.success(f"YTM معادل: {result*100:.2f}٪")
-  
+  import pandas as pd
+import streamlit as st
+
+@st.cache_data
+def load_navs():
+    df = pd.read_csv("fund_navs.csv")
+    df["date"] = pd.to_datetime(df["date"])
+    return df
+
+df_navs = load_navs()
+
